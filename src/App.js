@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import TabNav from "./Components/TabNav";
+import Tab from "./Components/Tab";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selected: "Home",
+    };
+  }
+  setSelected = (tab) => {
+    this.setState({ selected: tab });
+  };
+  render() {
+    return (
+      <div className="App mt-4">
+        <TabNav className="tabs"
+          tabs={["Home", "Settings", "Profile"]}
+          selected={this.state.selected}
+          setSelected={this.setSelected}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <Tab className="tabs" isSelected={this.state.selected === "Home"}>
+            <p>Tab 1 Content is showing here</p>
+          </Tab>
+          <Tab isSelected={this.state.selected === "Settings"}>
+            <p>Tab 2 Content is showing here</p>
+          </Tab>
+          <Tab isSelected={this.state.selected === "Profile"}>
+            <p>Tab 3 Content is showing here</p>
+          </Tab>
+        </TabNav>
+      </div>
+    );
+  }
 }
-
 export default App;
